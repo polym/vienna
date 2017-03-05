@@ -1,10 +1,17 @@
 {{ partial "header.html" . }}
 <section class="article-list">
-  <h1>{{ .Title }}</h1>
-  {{ range .Data.Pages }}
-  <hr/>
-  {{ .Render "li" }}
-  {{ end }}
+    <h1>{{ .Title }}</h1>
+    {{ range first 10 .Data.Pages }}
+        <div class="summary">
+            <h4><a href="{{ .RelPermalink }}">{{ .Title }}</a></h4>
+            {{ .Summary }}
+        </div>
+        {{ if .Truncated }}
+            <div class="read-more-link">
+                <a href="{{ .RelPermalink }}">Read More…</a>
+            </div>
+        {{ end }}
+    {{ end }}
 </section>
 {{ partial "footer.html" . }}
 
